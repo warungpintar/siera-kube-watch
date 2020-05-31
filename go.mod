@@ -1,4 +1,4 @@
-module gitlab.warungpintar.co/devops/siera-kube
+module github.com/warungpintar/siera-kube-watch
 
 go 1.14
 
