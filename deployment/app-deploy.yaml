@@ -13,8 +13,6 @@ spec:
       labels:
         app: siera-watch
     spec:
-      nodeSelector:
-        warpin: gitlab-ci
       serviceAccountName: siera-watch
       containers:
         - image: warungpintar/siera-kube-watch:v1.0.0
