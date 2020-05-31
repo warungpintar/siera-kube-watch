@@ -1,0 +1,7 @@
+webhook:
+  enabled: false
+  url: "http://webhookurl"
+
+slack:
+  enabled: false
+  url: "http://slackurl"
