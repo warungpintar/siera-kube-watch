@@ -22,7 +22,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Setting folder workdir
 WORKDIR /usr/src/app
-RUN mkdir -p etc/kube-siera
+RUN mkdir -p etc/siera-kube-watch
 
 COPY --from=builder /usr/src/app/bin/main .
 

@@ -25,7 +25,7 @@ spec:
               value: "PIPELINE_NUMBER"
           volumeMounts:
             - name: siera-watch-config
-              mountPath: /usr/src/app/etc/siera-kube
+              mountPath: /usr/src/app/etc/siera-kube-watch
 
       imagePullSecrets:
         - name: gcr-json-key
