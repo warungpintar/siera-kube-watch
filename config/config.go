@@ -21,7 +21,7 @@ type Config struct {
 var GlobalConfig = &Config{}
 
 func (config *Config) Load() (err error) {
-	yamlFile, err := ioutil.ReadFile("/usr/src/app/etc/siera-kube/config.yaml")
+	yamlFile, err := ioutil.ReadFile("/usr/src/app/etc/siera-kube-watch/config.yaml")
 	if err != nil {
 		log.Fatalf("Error read config file: %v", err)
 		return

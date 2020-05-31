@@ -20,9 +20,6 @@ spec:
         - image: warungpintar/siera-kube-watch:v1.0.0
           name: siera-watch
           imagePullPolicy: Always
-          env:
-            - name: PIPELINE
-              value: "PIPELINE_NUMBER"
           volumeMounts:
             - name: siera-watch-config
               mountPath: /usr/src/app/etc/siera-kube-watch
@@ -33,23 +30,4 @@ spec:
         - name: siera-watch-config
           secret:
             secretName: siera-watch-config
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: siera-watch-config
-  namespace: hack-tribe
-  labels:
-    app: siera-watch
-type: Opaque
-stringData:
-  config.yaml: |-
-    webhook:
-      enabled: false
-      url: "http://webhookurl"
-
-    slack:
-      enabled: false
-      url: "http://slackurl"
 
