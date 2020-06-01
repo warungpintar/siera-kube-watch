@@ -25,3 +25,7 @@ $ ./siera-kube-watch
 
 # Configuration
 Copy the `config/config.example.yaml` as `.config.yaml` and setup your own configuration as needed. 
+
+# Helm
+
+We provide a helm chart for easy installation https://github.com/warungpintar/charts/tree/master/warpin/siera-kube-watch
