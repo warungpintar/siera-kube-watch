@@ -1,0 +1,10 @@
+# An example of configuration file for siera-kube-watch
+webhook:
+  # if enabled, siera-kube-watch will post a message through url
+  enabled: true
+  url: "http://127.0.0.1/webhook"
+
+slack:
+  # if enabled, siera-kube-watch will post a message through slack url
+  enabled: false
+  url: "http://127.0.0.1/slack"
