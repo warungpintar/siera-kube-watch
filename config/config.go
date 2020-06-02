@@ -8,14 +8,16 @@ import (
 
 type Config struct {
 	Webhook struct {
-		Enabled bool   `yaml: enabled`
-		Url     string `yaml: url`
+		Enabled bool   `yaml:"enabled"`
+		Url     string `yaml:"url"`
 	}
 
 	Slack struct {
-		Enabled bool   `yaml: enabled`
-		Url     string `yaml: url`
+		Enabled bool   `yaml:"enabled"`
+		Url     string `yaml:"url"`
 	}
+
+	ExcludedReasons []string `yaml:"excluded.reasons,flow"`
 }
 
 var GlobalConfig = &Config{}
