@@ -8,3 +8,10 @@ slack:
   # if enabled, siera-kube-watch will post a message through slack url
   enabled: false
   url: "http://127.0.0.1/slack"
+
+# In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.
+# excluded.reasons is an array of reasons that will be excluded so any event that have one of these reasons won't be
+# published.
+# Example:
+#   excluded.reasons: ["FailedGetResourceMetric", "ScalingReplicaSet", "Started", "Killing", "Unhealthy"]
+excluded.reasons: []
