@@ -3,7 +3,7 @@ webhook:
   enabled: true
   url: "http://127.0.0.1/webhook"
 
-# For more information, refer to https://api.slack.com/bot-users
+# For more information, refer to https://api.slack.com/messaging/webhooks
 slack:
   enabled: false
   # slack url contain webhook url for your workspace.
