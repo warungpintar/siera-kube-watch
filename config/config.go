@@ -20,7 +20,7 @@ type Config struct {
 	Telegram struct {
 		Enabled bool   `yaml:"enabled"`
 		Token   string `yaml:"token"`
-		ChatId  string `yaml:"chat.id"`
+		ChatID  string `yaml:"chatID"`
 	}
 
 	ExcludedReasons []string `yaml:"excluded.reasons,flow"`

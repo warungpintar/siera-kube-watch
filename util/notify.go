@@ -27,7 +27,7 @@ func postEvent(message string) {
 	}
 
 	if config.GlobalConfig.Telegram.Enabled {
-		url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s", config.GlobalConfig.Telegram.Token, config.GlobalConfig.Telegram.ChatId)
+		url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s", config.GlobalConfig.Telegram.Token, config.GlobalConfig.Telegram.ChatID)
 		urls = append(urls, url)
 	}
 
