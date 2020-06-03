@@ -65,7 +65,7 @@ func postRequest(buffer []byte, url string) (err error) {
 
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return errors.New(fmt.Sprintf("Failed to post event with status code %d", resp.StatusCode))
+		return errors.New(fmt.Sprintf("Failed post event to url %s, with status code %d", url, resp.StatusCode))
 	}
 
 	return nil
