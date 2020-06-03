@@ -12,9 +12,8 @@ func NotifyEvent(event *corev1.Event) {
 			message := parseEventToMessage(event)
 			postEvent(message)
 		} else {
-			if event.Reason == SCALING_REPLICAT_SET || event.Reason == STARTED || event.Reason == KILLING {
+			if isExist(config.GlobalConfig.IncludedReasons, event.Reason) {
 				message := parseEventToMessage(event)
-				log.Println(message)
 				postEvent(message)
 			}
 		}
