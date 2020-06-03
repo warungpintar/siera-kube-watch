@@ -8,11 +8,44 @@ metadata:
 type: Opaque
 stringData:
   config.yaml: |-
+    # An example of configuration file for siera-kube-watch
     webhook:
       enabled: true
-      url: "http://siera.hack-tribe.svc.cluster.local:2112/workplace?thread=t_3249032331815485"
+      url: "http://127.0.0.1/webhook"
 
+    # For more information, refer to https://api.slack.com/messaging/webhooks
     slack:
-      enabled: false
-      url: "http://slackurl"
+      enabled: true
+      # slack url contain webhook url for your workspace.
+      # Example:
+      #   url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+      url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+
+    # For more information, refer to https://core.telegram.org/bots/api
+    telegram:
+      enabled: true
+      # token is a unique authentication token when a bot is created.
+      # Example:
+      #   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+      token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+      # chat.id is a string contain unique identifier for the target chat or username of the target channel (in the format
+      # @channelusername).
+      # Example:
+      #   chat.id: "-1234567890123"
+      chat.id: "-1234567890123"
+
+    # In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.
+    # excluded.reasons is an array of reasons that will be excluded so any event that have one of these reasons won't be
+    # published.
+    # Example:
+    #   excluded.reasons: ["FailedGetResourceMetric", "ScalingReplicaSet", "Started", "Killing", "Unhealthy"]
+    excluded.reasons: []
+
+    # For filtering purpose, by default we excluded normal events (to avoid noisy channel) but if needed you can include
+    # several reasons from normal event for investigation purpose.
+    # included.reasons is an array of reasons that will be included from normal events.
+    # Example:
+    #   included.reasons: ["ScalingReplicaSet", "SuccessfulCreate", "SuccessfulDelete"]
+    included.reasons: ["ScalingReplicaSet", "Started", "Killing"]
+
 
