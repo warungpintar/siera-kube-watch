@@ -5,7 +5,7 @@ webhook:
 
 # For more information, refer to https://api.slack.com/messaging/webhooks
 slack:
-  enabled: false
+  enabled: true
   # slack url contain webhook url for your workspace.
   # Example:
   #   url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
@@ -31,10 +31,9 @@ telegram:
 #   excluded.reasons: ["FailedGetResourceMetric", "ScalingReplicaSet", "Started", "Killing", "Unhealthy"]
 excluded.reasons: []
 
-# For filtering purpose, by default we excluded most of the normal events (to avoid noisy channel) except for event
-# with reason ScalingReplicaSet, Started, and Killing (you can also exclude this event through excluded.reasons
-# configuration).
-# included.reasons is an array of reasons that will be included from normal events if needed.
+# For filtering purpose, by default we excluded normal events (to avoid noisy channel) but if needed you can include
+# several reasons from normal event for investigation purpose.
+# included.reasons is an array of reasons that will be included from normal events.
 # Example:
-#   included.reasons: ["SuccessfulCreate", "SuccessfulDelete"]
-included.reasons: []
+#   included.reasons: ["ScalingReplicaSet", "SuccessfulCreate", "SuccessfulDelete"]
+included.reasons: ["ScalingReplicaSet", "Started", "Killing"]
