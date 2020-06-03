@@ -17,7 +17,14 @@ type Config struct {
 		Url     string `yaml:"url"`
 	}
 
+	Telegram struct {
+		Enabled bool   `yaml:"enabled"`
+		Token   string `yaml:"token"`
+		ChatId  string `yaml:"chat.id"`
+	}
+
 	ExcludedReasons []string `yaml:"excluded.reasons,flow"`
+	IncludedReasons []string `yaml:"included.reasons,flow"`
 }
 
 var GlobalConfig = &Config{}
