@@ -18,10 +18,10 @@ telegram:
   # Example:
   #   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-  # chat.id is a string contain unique identifier for the target chat or username of the target channel (in the format
+  # chatID is a string contain unique identifier for the target chat or username of the target channel (in the format
   # @channelusername).
   # Example:
-  #   chat.id: "-1234567890123"
+  #   chatID: "-1234567890123"
   chatID: "-1234567890123"
 
 # In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.

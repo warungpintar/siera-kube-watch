@@ -23,6 +23,12 @@ type Config struct {
 		ChatID  string `yaml:"chatID"`
 	}
 
+	Workplace struct {
+		Enabled   bool   `yaml:"enabled"`
+		ThreadKey string `yaml:"thread.key"`
+		Token     string `yaml:"token"`
+	}
+
 	ExcludedReasons []string `yaml:"excluded.reasons,flow"`
 	IncludedReasons []string `yaml:"included.reasons,flow"`
 }
