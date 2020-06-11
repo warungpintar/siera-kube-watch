@@ -42,26 +42,38 @@ func postEvent(message string) {
 	if config.GlobalConfig.Webhook.Enabled {
 		model := model.StdModel{}
 		model.New(message)
-		model.Send(config.GlobalConfig.Webhook.Url)
+		err := model.Send(config.GlobalConfig.Webhook.Url)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	if config.GlobalConfig.Slack.Enabled {
 		model := model.StdModel{}
 		model.New(message)
-		model.Send(config.GlobalConfig.Slack.Url)
+		err := model.Send(config.GlobalConfig.Slack.Url)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	if config.GlobalConfig.Telegram.Enabled {
 		model := model.StdModel{}
 		model.New(message)
 		url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s", config.GlobalConfig.Telegram.Token, config.GlobalConfig.Telegram.ChatID)
-		model.Send(url)
+		err := model.Send(url)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	if config.GlobalConfig.Workplace.Enabled {
 		model := model.WorkplaceModel{}
 		model.New(message, config.GlobalConfig.Workplace.ThreadKey)
 		url := fmt.Sprintf("https://graph.facebook.com/v3.2/me/messages?access_token=%s&formatting=MARKDOWN", config.GlobalConfig.Workplace.Token)
-		model.Send(url)
+		err := model.Send(url)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }

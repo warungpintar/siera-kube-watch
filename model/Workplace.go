@@ -27,7 +27,7 @@ func (model *WorkplaceModel) New(text string, threadKey string) {
 	}
 }
 
-func (model *WorkplaceModel) Send(url string) {
+func (model *WorkplaceModel) Send(url string) (err error) {
 	buffer, err := json.Marshal(model)
 	if err != nil {
 		return

@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -20,7 +19,6 @@ func postRequest(buffer []byte, url string) (err error) {
 
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		log.Println(url)
 		return errors.New(fmt.Sprintf("Failed to post event to %s with status code %d", url, resp.StatusCode))
 	}
 
