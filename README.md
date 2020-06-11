@@ -4,6 +4,7 @@
 Supported webhooks:
 - slack
 - telegram
+- workplace chat
 - webhook
 
 # Build and Run
@@ -24,19 +25,19 @@ $ ./siera-kube-watch
 ```
 
 # Configuration
-Copy the `config/config.example.yaml` as `.config.yaml` and setup your own configuration as needed. 
+Copy the `config/config.example.yaml` as `config.yaml` and setup your own configuration as needed. 
 
 # Helm
 
 We provide a helm chart for easy installation https://github.com/warungpintar/charts/tree/master/warpin/siera-kube-watch
 
-## Result webhook
-![GitHub Logo](result-webhook.png)
+## Result workplace chat
+![GitHub Logo](docs/result-workchat.png)
 
 ## Result slack
-![GitHub Logo](result-slack.png)
+![GitHub Logo](docs/result-slack.png)
 
 ## Result telegram
-![GitHub Logo](result-telegram.png)
+![GitHub Logo](docs/result-telegram.png)
 
 docker image size  35.2MB
