@@ -8,8 +8,8 @@ slack:
   enabled: true
   # slack url contain webhook url for your workspace.
   # Example:
-  #   url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
-  url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+  #   url: "https://hooks.slack.com/services/TOKEN"
+  url: "https://hooks.slack.com/services/TOKEN"
 
 # For more information, refer to https://core.telegram.org/bots/api
 telegram:
@@ -18,11 +18,25 @@ telegram:
   # Example:
   #   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-  # chat.id is a string contain unique identifier for the target chat or username of the target channel (in the format
+  # chatID is a string contain unique identifier for the target chat or username of the target channel (in the format
   # @channelusername).
   # Example:
-  #   chat.id: "-1234567890123"
+  #   chatID: "-1234567890123"
   chatID: "-1234567890123"
+
+# For more information, refer to https://developers.facebook.com/docs/workplace/bots/
+workplace:
+  enabled: false
+  # thread.key is unique identifier of an existing group chat thread. 
+  # Example:
+  #   thread.key: "t_123456789"
+  thread.key: "t_123456789"
+  # token is a generated access token when you create a new app for Workplace. 
+  # For more information, refer to https://developers.facebook.com/docs/workplace/reference/permissions/ 
+  # Example:
+  #   token: "ABCDEF123456"
+  token: "ABCDEF123456"
+
 
 # In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.
 # excluded.reasons is an array of reasons that will be excluded so any event that have one of these reasons won't be

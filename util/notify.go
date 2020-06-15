@@ -1,73 +1,79 @@
 package util
 
 import (
-	"bytes"
-	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/warungpintar/siera-kube-watch/config"
+	"github.com/warungpintar/siera-kube-watch/model"
+	corev1 "k8s.io/api/core/v1"
 	"log"
-	"net/http"
 )
 
-type SieraRequest struct {
-	Text string `json:"text"`
-}
-
-func postEvent(message string) {
-	log.Println(message)
-	var urls []string
-
-	if config.GlobalConfig.Webhook.Enabled {
-		urls = append(urls, config.GlobalConfig.Webhook.Url)
-	}
-
-	if config.GlobalConfig.Slack.Enabled {
-		urls = append(urls, config.GlobalConfig.Slack.Url)
-	}
-
-	if config.GlobalConfig.Telegram.Enabled {
-		url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s", config.GlobalConfig.Telegram.Token, config.GlobalConfig.Telegram.ChatID)
-		urls = append(urls, url)
-	}
-
-	for _, url := range urls {
-		err := postSieraRequest(message, url)
-		if err != nil {
-			log.Println(err)
+func NotifyEvent(event *corev1.Event) {
+	if !isExist(config.GlobalConfig.ExcludedReasons, event.Reason) {
+		if event.Type != NORMAL {
+			message := parseEventToMessage(event)
+			postEvent(message)
+		} else {
+			if isExist(config.GlobalConfig.IncludedReasons, event.Reason) {
+				message := parseEventToMessage(event)
+				postEvent(message)
+			}
 		}
 	}
 }
 
-func postSieraRequest(text string, url string) (err error) {
-	requestModel := &SieraRequest{
-		Text: text,
-	}
-
-	buffer, err := json.Marshal(requestModel)
-	if err != nil {
-		return
-	}
-
-	err = postRequest(buffer, url)
-	return
+func parseEventToMessage(event *corev1.Event) string {
+	return fmt.Sprintf("[%s: %s] %s/%s %s", event.Type, event.Reason, event.Namespace, event.Name, event.Message)
 }
 
-func postRequest(buffer []byte, url string) (err error) {
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(buffer))
-	req.Header.Set("Content-Type", "application/json")
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return
+func isExist(arr []string, element string) bool {
+	for _, el := range arr {
+		if el == element {
+			return true
+		}
 	}
 
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		log.Println(url)
-		return errors.New(fmt.Sprintf("Failed to post event to %s with status code %d", url, resp.StatusCode))
+	return false
+}
+
+func postEvent(message string) {
+	log.Println(message)
+
+	if config.GlobalConfig.Webhook.Enabled {
+		model := model.StdModel{}
+		model.New(message)
+		err := model.Send(config.GlobalConfig.Webhook.Url)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
-	return nil
+	if config.GlobalConfig.Slack.Enabled {
+		model := model.StdModel{}
+		model.New(message)
+		err := model.Send(config.GlobalConfig.Slack.Url)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+
+	if config.GlobalConfig.Telegram.Enabled {
+		model := model.StdModel{}
+		model.New(message)
+		url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s", config.GlobalConfig.Telegram.Token, config.GlobalConfig.Telegram.ChatID)
+		err := model.Send(url)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+
+	if config.GlobalConfig.Workplace.Enabled {
+		model := model.WorkplaceModel{}
+		model.New(message, config.GlobalConfig.Workplace.ThreadKey)
+		url := fmt.Sprintf("https://graph.facebook.com/v3.2/me/messages?access_token=%s&formatting=MARKDOWN", config.GlobalConfig.Workplace.Token)
+		err := model.Send(url)
+		if err != nil {
+			log.Println(err)
+		}
+	}
 }
