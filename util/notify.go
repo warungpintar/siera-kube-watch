@@ -23,7 +23,7 @@ func NotifyEvent(event *corev1.Event) {
 }
 
 func parseEventToMessage(event *corev1.Event) string {
-	return fmt.Sprintf("[%s: %s] %s/%s %s", event.Type, event.Reason, event.Namespace, event.Name, event.Message)
+	return fmt.Sprintf("\n%v [%s: %s] %s/%s %s", event.LastTimestamp, event.Type, event.Reason, event.Namespace, event.Name, event.Message)
 }
 
 func isExist(arr []string, element string) bool {
