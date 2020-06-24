@@ -9,21 +9,32 @@ import (
 )
 
 func NotifyEvent(event *corev1.Event) {
-	if !isExist(config.GlobalConfig.ExcludedReasons, event.Reason) {
-		if event.Type != NORMAL {
-			message := parseEventToMessage(event)
-			postEvent(message)
-		} else {
-			if isExist(config.GlobalConfig.IncludedReasons, event.Reason) {
+	if isNamespaceIncluded(event.Namespace) {
+		if !isExist(config.GlobalConfig.ExcludedReasons, event.Reason) {
+			if event.Type != NORMAL {
 				message := parseEventToMessage(event)
 				postEvent(message)
+			} else {
+				if isExist(config.GlobalConfig.IncludedReasons, event.Reason) {
+					message := parseEventToMessage(event)
+					postEvent(message)
+				}
 			}
 		}
 	}
 }
 
+func isNamespaceIncluded(namespace string) bool {
+	if config.GlobalConfig.IncludedNamespace == nil || len(config.GlobalConfig.IncludedNamespace) == 0 ||
+		isExist(config.GlobalConfig.IncludedNamespace, namespace) {
+		return true
+	}
+
+	return false
+}
+
 func parseEventToMessage(event *corev1.Event) string {
-	return fmt.Sprintf("\n%v [%s: %s] %s/%s %s", event.LastTimestamp, event.Type, event.Reason, event.Namespace, event.Name, event.Message)
+	return fmt.Sprintf("[%s: %s] %s/%s %s %v", event.Type, event.Reason, event.Namespace, event.Name, event.Message, event.LastTimestamp)
 }
 
 func isExist(arr []string, element string) bool {
