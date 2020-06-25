@@ -8,44 +8,64 @@ metadata:
 type: Opaque
 stringData:
   config.yaml: |-
-    # An example of configuration file for siera-kube-watch
+    ### An example of configuration file for siera-kube-watch
     webhook:
       enabled: true
       url: "http://127.0.0.1/webhook"
 
-    # For more information, refer to https://api.slack.com/messaging/webhooks
+    ### For more information, refer to https://api.slack.com/messaging/webhooks
     slack:
       enabled: true
-      # slack url contain webhook url for your workspace.
-      # Example:
-      #   url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+      ### slack url contain webhook url for your workspace.
+      ### Example:
+      ###   url: "https://hooks.slack.com/services/TOKEN"
       url: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 
-    # For more information, refer to https://core.telegram.org/bots/api
+    ### For more information, refer to https://core.telegram.org/bots/api
     telegram:
       enabled: true
-      # token is a unique authentication token when a bot is created.
-      # Example:
-      #   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+      ### token is a unique authentication token when a bot is created.
+      ### Example:
+      ###   token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
       token: "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-      # chat.id is a string contain unique identifier for the target chat or username of the target channel (in the format
-      # @channelusername).
-      # Example:
-      #   chatID: "-1234567890123"
+      ### chatID is a string contain unique identifier for the target chat or username of the target channel (in the format
+      ### @channelusername).
+      ### Example:
+      ###   chatID: "-1234567890123"
       chatID: "-1234567890123"
 
-    # In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.
-    # excluded.reasons is an array of reasons that will be excluded so any event that have one of these reasons won't be
-    # published.
-    # Example:
-    #   excluded.reasons: ["FailedGetResourceMetric", "ScalingReplicaSet", "Started", "Killing", "Unhealthy"]
+    ### For more information, refer to https://developers.facebook.com/docs/workplace/bots/
+    workplace:
+      enabled: false
+      ### thread.key is unique identifier of an existing group chat thread. 
+      ### Example:
+      ###   thread.key: "t_123456789"
+      thread.key: "t_123456789"
+      ### token is a generated access token when you create a new app for Workplace. 
+      ### For more information, refer to https://developers.facebook.com/docs/workplace/reference/permissions/ 
+      ### Example:
+      ###   token: "ABCDEF123456"
+      token: "ABCDEF123456"
+
+    ### In case you want to filter your event stream from specific reason, you can add that reason to excluded.reasons.
+    ### excluded.reasons is an array of reasons that will be excluded so any event that have one of these reasons won't be
+    ### published.
+    ### Example:
+    ###   excluded.reasons: ["FailedGetResourceMetric", "ScalingReplicaSet", "Started", "Killing", "Unhealthy"]
     excluded.reasons: []
 
-    # For filtering purpose, by default we excluded normal events (to avoid noisy channel) but if needed you can include
-    # several reasons from normal event for investigation purpose.
-    # included.reasons is an array of reasons that will be included from normal events.
-    # Example:
-    #   included.reasons: ["ScalingReplicaSet", "SuccessfulCreate", "SuccessfulDelete"]
+    ### For filtering purpose, by default we excluded normal events (to avoid noisy channel) but if needed you can include
+    ### several reasons from normal event for investigation purpose.
+    ### included.reasons is an array of reasons that will be included from normal events.
+    ### Example:
+    ###   included.reasons: ["ScalingReplicaSet", "SuccessfulCreate", "SuccessfulDelete"]
     included.reasons: ["ScalingReplicaSet", "Started", "Killing"]
 
+    ### By default we include event from all namespaces, but you can filter namespace that you want to watch for.
+    ### included.namespaces is an array of specific namespaces that will be included instead of publishing all namespaces.
+    ### Example:
+    ###   included.namespaces: ["my-namespace", "your-namespace"]
+    ### If you want to add this configuration, you can uncomment this field (by removing `#` in front of this
+    ### configuration) and set whatever value you wish.
+    # included.namespaces: []
 
