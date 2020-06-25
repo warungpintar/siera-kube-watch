@@ -31,6 +31,8 @@ type Config struct {
 
 	ExcludedReasons []string `yaml:"excluded.reasons,flow"`
 	IncludedReasons []string `yaml:"included.reasons,flow"`
+
+	IncludedNamespace []string `yaml:"included.namespaces,flow"`
 }
 
 var GlobalConfig = &Config{}
