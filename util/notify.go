@@ -48,8 +48,6 @@ func isExist(arr []string, element string) bool {
 }
 
 func postEvent(message string) {
-	log.Println(message)
-
 	if config.GlobalConfig.Webhook.Enabled {
 		model := model.StdModel{}
 		model.New(message)
