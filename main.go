@@ -17,6 +17,9 @@ import (
 func main() {
 	//setup kubernetesConfig so the client can connect to kube cluster
 	kubernetesConfig, err := clientcmd.BuildConfigFromFlags("", "")
+
+	// uncomment this to test on on your local
+	// kubernetesConfig, err := clientcmd.BuildConfigFromFlags("", filepath.Join(os.Getenv("HOME"), ".kube", "config"))
 	if err != nil {
 		log.Fatalf("Error parsing kubernetes config: %v", err)
 	}

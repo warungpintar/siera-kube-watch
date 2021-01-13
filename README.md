@@ -25,7 +25,7 @@ $ ./siera-kube-watch
 ```
 
 # Configuration
-Copy the `config/config.example.yaml` as `config.yaml` and setup your own configuration as needed. 
+Copy the `config.example.yaml` as `config.yaml` and setup your own configuration as needed. 
 
 # Helm
 
