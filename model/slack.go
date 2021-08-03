@@ -3,6 +3,8 @@ package model
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/warungpintar/siera-kube-watch/config"
 )
 
 type SlackModel struct {
@@ -11,10 +13,10 @@ type SlackModel struct {
 	Username string `json:"username"`
 }
 
-func (model *SlackModel) New(text string, channel string, username string) {
+func (model *SlackModel) New(text string) {
 	model.Text = text
-	model.Channel = channel
-	model.Username = username
+	model.Channel = config.GlobalConfig.Slack.Channel
+	model.Username = config.GlobalConfig.Slack.Username
 }
 
 func (model *SlackModel) Send(url string) (err error) {
