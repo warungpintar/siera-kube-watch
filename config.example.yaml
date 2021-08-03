@@ -9,6 +9,8 @@ slack:
   ### slack url contain webhook url for your workspace.
   ### Example:
   ###   url: "https://hooks.slack.com/services/TOKEN"
+  ###   username: "Siera Kube Watch"                        [OPTIONAL]
+  ###   channel: "#siera"                                   [OPTIONAL]
   url: "https://hooks.slack.com/services/TOKEN"
 
 ### For more information, refer to https://core.telegram.org/bots/api
