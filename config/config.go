@@ -13,8 +13,10 @@ type Config struct {
 	}
 
 	Slack struct {
-		Enabled bool   `yaml:"enabled"`
-		Url     string `yaml:"url"`
+		Enabled  bool   `yaml:"enabled"`
+		Url      string `yaml:"url"`
+		Username string `yaml:"username"`
+		Channel  string `yaml:"channel"`
 	}
 
 	Telegram struct {

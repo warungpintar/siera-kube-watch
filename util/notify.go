@@ -58,7 +58,7 @@ func postEvent(message string) {
 	}
 
 	if config.GlobalConfig.Slack.Enabled {
-		model := model.StdModel{}
+		model := model.SlackModel{}
 		model.New(message)
 		err := model.Send(config.GlobalConfig.Slack.Url)
 		if err != nil {
