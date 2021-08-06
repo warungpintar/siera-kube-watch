@@ -2,10 +2,11 @@ package util
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/warungpintar/siera-kube-watch/config"
 	"github.com/warungpintar/siera-kube-watch/model"
 	corev1 "k8s.io/api/core/v1"
-	"log"
 )
 
 func NotifyEvent(event *corev1.Event) {
@@ -13,11 +14,11 @@ func NotifyEvent(event *corev1.Event) {
 		if !isExist(config.GlobalConfig.ExcludedReasons, event.Reason) {
 			if event.Type != NORMAL {
 				message := parseEventToMessage(event)
-				postEvent(message)
+				PostEvent(message)
 			} else {
 				if isExist(config.GlobalConfig.IncludedReasons, event.Reason) {
 					message := parseEventToMessage(event)
-					postEvent(message)
+					PostEvent(message)
 				}
 			}
 		}
@@ -47,7 +48,7 @@ func isExist(arr []string, element string) bool {
 	return false
 }
 
-func postEvent(message string) {
+func PostEvent(message string) {
 	if config.GlobalConfig.Webhook.Enabled {
 		model := model.StdModel{}
 		model.New(message)
