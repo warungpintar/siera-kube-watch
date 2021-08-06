@@ -1,15 +1,21 @@
 package config
 
 import (
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
+
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
 	Webhook struct {
 		Enabled bool   `yaml:"enabled"`
 		Url     string `yaml:"url"`
+	}
+
+	Livenesscheck struct {
+		Enabled  bool   `yaml:"enabled"`
+		Interval string `yaml:"interval"`
 	}
 
 	Slack struct {

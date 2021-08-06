@@ -7,6 +7,13 @@ Supported webhooks:
 - workplace chat
 - webhook
 
+It also supports liveness check (dead man's switch) functionality for alerting on availability of alerting pipeline.
+```
+livenesscheck:
+  enabled: true
+  interval: "1m"
+```
+
 # Build and Run
 
 ## Install Dependencies

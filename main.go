@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/warungpintar/siera-kube-watch/config"
 	"log"
+
+	"github.com/warungpintar/siera-kube-watch/config"
+	liveness_check "github.com/warungpintar/siera-kube-watch/liveness-check"
 
 	eventHandler "github.com/warungpintar/siera-kube-watch/event-handler"
 	"k8s.io/apimachinery/pkg/util/runtime"
@@ -48,6 +50,8 @@ func main() {
 		DeleteFunc: eventHandler.OnDeleteEvent,
 		UpdateFunc: eventHandler.OnUpdateEvent,
 	})
+
+	go liveness_check.Ping()
 
 	go eventInformer.Run(eventStopper)
 

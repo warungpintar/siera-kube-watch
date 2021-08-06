@@ -3,6 +3,11 @@ webhook:
   enabled: true
   url: "http://127.0.0.1/webhook"
 
+### Enable dead man's switch functionality, similar to https://docs.openshift.com/container-platform/3.11/install_config/prometheus_cluster_monitoring.html#dead-mans-switch_prometheus-cluster-monitoring
+livenesscheck:
+  enabled: true
+  interval: "2s"
+
 ### For more information, refer to https://api.slack.com/messaging/webhooks
 slack:
   enabled: true
